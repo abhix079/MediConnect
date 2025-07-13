@@ -1,0 +1,111 @@
+
+
+.mainContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  height: 100vh;
+}
+.logoContainer {
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 50px;
+   
+}
+.logo{ 
+    max-width: 180px;
+    height:auto;
+    object-fit: contain;
+}
+
+.logoContainer p{
+  
+    font-weight: 560;
+    font-size: 12px;
+}
+.logoContainer span{
+    color: #334776;
+}
+
+
+.loginCard {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 30px;
+  width: 380px;
+  
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.cardHeader h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+.cardHeader p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.inputContainer {
+  text-align: left;
+}
+.inputContainer label {
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 540;
+  display: block;
+  margin-top: 15px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  position: relative;
+}
+.inputGroup input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14.5px;
+  font-weight: 580;
+  background: transparent;
+}
+.icon {
+  margin-right: 10px;
+  color: #999;
+}
+
+
+
+
+
+.loginBtn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #334776;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.loginBtn:hover {
+  background: #2a3a5f;
+}
+
