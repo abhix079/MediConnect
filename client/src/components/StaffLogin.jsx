@@ -9,7 +9,7 @@ export default function DoctorLogin() {
       <div className={styles.logoContainer}>
         <img src={logo} className={styles.logo} alt="logo" />
         <p>
-          <span>Connecting The</span> Pharma World
+          <span>Connecting The</span>Pharma World
         </p>
       </div>
 
@@ -32,6 +32,7 @@ export default function DoctorLogin() {
             <input type="password" placeholder="Enter password" />
             
           </div>
+          <p className={styles.msg}>NOTE : Keep your User ID and Password private to avoid unauthorized access to your dashboard.</p>
 
           <Link to="/staff-dashboard"><button className={styles.loginBtn}>Get Started</button></Link>
 
