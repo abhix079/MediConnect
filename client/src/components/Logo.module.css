@@ -1,0 +1,24 @@
+
+.logoContainer {
+   justify-content: center;
+   align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 25px;
+   
+}
+.logo{ 
+    max-width: 155px;
+    height:auto;
+    object-fit: contain;
+}
+
+.logoContainer p{
+  
+    font-weight: 560;
+    font-size: 10.2px;
+}
+.logoContainer span{
+    color: #334776;
+}

@@ -32,7 +32,7 @@ export default function DoctorLogin() {
             <input type="password" placeholder="Enter password" />
             
           </div>
-          <p className={styles.msg}>NOTE : Keep your User ID and Password private to avoid unauthorized access to your dashboard.</p>
+          <p className={styles.msg}> NOTE: Keep your credentials safe to avoid unauthorized access.</p>
 
           <Link to="/staff-dashboard"><button className={styles.loginBtn}>Get Started</button></Link>
 

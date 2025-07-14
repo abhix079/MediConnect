@@ -1,29 +1,24 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import cors from "cors";
 
-dotenv.config(); //here we are configuring the dotenv to access the .env content
+dotenv.config();
 connectDB();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
+app.use(cors()); // Allow frontend requests
 app.use(express.json());
 
-//Routes
-
 app.get("/", (req, res) => {
-  res.send("hello from server");
+  res.send("Hello from server");
 });
 
-app.use("/api/v1",userRoutes);
-//server connection code 
+app.use("/api", authRoutes);
 
-try {
-  app.listen(PORT, () => {
-    console.log(`Server is running on PORT:${PORT}`);
-  });
-} catch (err) {
-  console.log("Internal server error", err.message);
-}
+app.listen(PORT, () => {
+  console.log(`Server running on PORT: ${PORT}`);
+});
