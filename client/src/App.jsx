@@ -1,8 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
-import Navbar from "./components/Navbar"; 
 import LandingPage from "./components/LandingPage";
 import DoctorLogin from "./components/DoctorLogin";
 import StaffLogin from "./components/StaffLogin";
@@ -10,6 +8,7 @@ import PatientLogin from "./components/PatientLogin";
 import DoctorDashboard from "./pages/doctor/DoctorDashboard";
 import StaffDashboard from "./pages/staff/StaffDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
+
 
 function App() {
   return (
@@ -27,6 +26,7 @@ function App() {
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/staff-dashboard" element={<StaffDashboard />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
+         
         </Routes>
       </BrowserRouter>
     </>

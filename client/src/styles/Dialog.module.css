@@ -1,0 +1,97 @@
+
+.dialogBox {
+   background-color: rgb(233, 236, 255);
+   animation: popOut 1s ease-in;
+  padding: 0px 20px 15px 20px; 
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 11;
+  width: 40vw;
+}
+
+.btn {
+    font-size: 16px;
+ background-color:rgb(129, 142, 218);
+  padding: 5px 15px;
+  border-radius: 7px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  
+}
+.personalDetail{
+  display: flex;
+  
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0px 10px;
+}
+.leftSide{
+  display: flex;
+flex-wrap: wrap;
+  text-align: left;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.rightSide{
+  background-color:rgb(207, 213, 253) ;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+.dialogHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+
+    border-bottom: 1px solid rgb(194, 191, 191);
+    
+
+}
+.dialogHeader h2{
+  
+  font-size: 23px;
+  border-left: 5px solid rgb(101, 117, 207);
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.patientDetail{
+  display: flex;
+ 
+  justify-content: center;
+  flex-direction: column;
+  
+}
+.dialogHeadings{
+  background-color: rgb(166, 177, 240);
+  width: 100%;
+  text-align: center;
+ margin: 0px 0px 10px 0px;
+  border-radius: 5px;
+  padding: 3px 0px;
+
+}
+.medicalDetail{
+  padding: 0px 10px;
+  margin-bottom: 20px;
+}
+
+.completeButton{
+  padding: 7px 0px;
+  font-size: 15px;
+  font-weight: 550;
+  border: none;
+  background-color: green;
+  border-radius: 7px;
+  color: white;
+  margin: 10px 0px;
+  cursor: pointer;
+
+}
+
+

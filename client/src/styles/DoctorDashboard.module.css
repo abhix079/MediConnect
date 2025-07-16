@@ -2,7 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-}
+} 
 
 .greetingMsg{
    flex: 1;
@@ -18,4 +18,12 @@
 .greetingMsg p{
     font-size: 16.5px;
     font-weight: 540;
+}
+.appointmentContainer,.historyContainer{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 5vh;
 }
