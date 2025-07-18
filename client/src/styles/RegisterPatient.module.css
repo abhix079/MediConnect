@@ -1,0 +1,128 @@
+.mainContainer{
+
+    margin-bottom: 20px;
+    padding:  15px 20px;
+border-radius: 10px;
+   width: auto;
+   
+    background-color: rgb(233, 236, 255);
+}
+
+.topContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.topContent h2{
+    font-size: 23px;
+    padding-left: 5px;
+    border-left: 5px solid rgb(101, 117, 207);
+    border-radius: 5px;
+}
+/* 
+.btn {
+    font-size: 16px;
+ background-color:rgb(129, 142, 218);
+  padding: 5px 15px;
+  
+  border-radius: 7px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  
+} */
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   gap: 15px;
+    margin: 15px 0px;
+}
+.headerBtn{
+    
+    cursor: pointer;
+    min-width: 23vw;
+    font-size: 16px;
+    padding: 7px 15px;
+    border: none;
+    background-color: rgb(217, 221, 243);
+    border-radius: 5px;
+ 
+}
+.activeTab {
+  background-color: rgb(129, 142, 218);
+  color: white;
+  font-weight: 600;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+
+}
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border: 1px solid black;
+  outline: none;
+  color: black;
+}
+
+
+.btn {
+  width: 100%;
+  background-color: rgb(129, 142, 218);
+  padding: 8px 20px;
+  border: none;
+  border-radius: 7px;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.formGroup select{
+    background-color: white;
+    
+}
+.form{
+    border: none;
+}
+
+
+
+.searchBar {
+  padding: 7px 12px;
+  width: 100%;
+  font-size: 16px;
+  
+   border: 1px solid #ccc;
+  border-radius: 8px;
+  
+}
+
+.rescheduleContainer center{
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 550;
+}

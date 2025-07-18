@@ -19,8 +19,9 @@ export default function ActiveDialog({closeDialog}){
                           <p><strong>Name : </strong> Aditya Kumar</p>
                           <p><strong>Age : </strong>22</p>
                           <p><strong>Gender : </strong>Male</p>
+                          
                           <p><strong>Address : </strong>Raptinagar Phase-4, Gorakhpur, 273003</p>
-                        </div>
+                        </div> 
         
                         <div className={styles.rightSide}>
                           <FaUser size={60} />

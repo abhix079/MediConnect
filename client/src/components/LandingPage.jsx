@@ -24,7 +24,8 @@ export default function LandingPage() {
        <div className={styles.buttonContainer}>
           <Link to ="/doctor-login" ><button className={styles.roleButton}>Login as Doctor</button></Link>
           <Link to ="/staff-login" ><button className={styles.roleButton}>Login as Staff</button></Link>
-          <Link to ="/patient-login" ><button className={styles.roleButton}>Login as Patient</button></Link>
+          <Link to ="/admin-login" ><button className={styles.roleButton}>Login as Admin</button></Link>
+          
          
         </div>
         <p className={styles.termsPara}>By continuing, you agree to our Terms of Service and Privacy Policy</p>

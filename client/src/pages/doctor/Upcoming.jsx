@@ -51,17 +51,11 @@ export default function Upcoming() {
       status: "Upcoming",
     },
     {
-      id: "P006",
+      id: "P009",
       name: "Nitish Rana ",
       reason: "Elbow Fracture",
       status: "Upcoming",
-    },
-    {
-      id: "P009",
-      name: "Akshay Goyal ",
-      reason: "Dengue",
-      status: "Upcoming",
-    },
+    }
   ];
   return (
     <>

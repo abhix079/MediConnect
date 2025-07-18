@@ -4,6 +4,19 @@
 :root{
   --font-family: "Nunito", sans-serif;
 }
+::-webkit-scrollbar {
+  width: 8px;
+ 
+}
+::-webkit-scrollbar-track {
+  background: #effffa;
+}
+::-webkit-scrollbar-thumb {
+  background: #effffa;
+border-radius: 6px;
+  
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -46,7 +46,7 @@ export default function Appointment({ goBack }) {
       <div className={styles.tableContainer}>
         {activeTab === "upcoming" && <Upcoming />}
         {activeTab === "active" && <Active onContinueButton={handleContinueButton} />}
-        {activeTab === "pending" && <Pending />}
+        {activeTab === "pending" && <Pending  onContinueButton={handleContinueButton}/>}
         {activeTab === "completed" && <Completed onViewButton={handleViewButton} />}
         {activeTab === "cancelled" && <Cancelled />}
       </div>
@@ -55,6 +55,7 @@ export default function Appointment({ goBack }) {
         <div className={styles.dialogOverlay}>
           {dialogType === "active" && <ActiveDialog closeDialog={closeDialog} />}
           {dialogType === "completed" && <CompletedDialog closeDialog={closeDialog} />}
+          
         </div>
       )}
     </div>

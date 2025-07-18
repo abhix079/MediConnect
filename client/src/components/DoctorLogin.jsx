@@ -7,20 +7,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function DoctorLogin() {
-
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     if (!userId || !password) {
       toast.error("Enter User ID and Password");
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/doctor-login", {
+      const res = await axios.post("http://localhost:8000/api/doctor", {
         userId,
         password,
       });
@@ -28,11 +28,13 @@ export default function DoctorLogin() {
       if (res.status === 200) {
         toast.success("Login Successful");
 
+        //  Store doctor's name in localStorage
+        localStorage.setItem("doctorName", res.data.name || "Doctor");
+
         navigate("/doctor-dashboard");
       }
     } catch (err) {
-      const msg = err.response?.data?.message || "Login failed";
-      toast.error(msg);
+      toast.error(err.response?.data?.message || "Login failed");
     }
   };
 
@@ -46,10 +48,10 @@ export default function DoctorLogin() {
       <div className={styles.loginCard}>
         <div className={styles.cardHeader}>
           <h2>Login to Continue</h2>
-          <p>Access your doctor dashboard</p>
+          <p>Access your Doctor dashboard</p>
         </div>
 
-        <div className={styles.inputContainer}>
+        <form className={styles.inputContainer} onSubmit={handleLogin}>
           <label>User ID</label>
           <div className={styles.inputGroup}>
             <FaUser className={styles.icon} />
@@ -76,10 +78,10 @@ export default function DoctorLogin() {
             NOTE: Keep your credentials safe to avoid unauthorized access.
           </p>
 
-          <button onClick={handleLogin} className={styles.loginBtn}>
+          <button type="submit" className={styles.loginBtn}>
             Get Started
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

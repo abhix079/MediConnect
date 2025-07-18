@@ -1,6 +1,6 @@
 import styles from "../../styles/Appointment.module.css";
 
-export default function Pending(){
+export default function Pending({onContinueButton}){
 
       const appointments = [
         {
@@ -53,6 +53,7 @@ export default function Pending(){
                     <th>Patient Name</th>
                     <th>Symptom / Reason</th>
                     <th>Status</th>
+                    <th>Action</th>
                    
                 </tr>
             </thead>
@@ -65,6 +66,9 @@ export default function Pending(){
                        <td>{appt.reason}</td>
                        <td><p  className={styles.pendingStatus}>{appt.status}</p></td>
                        
+                        <td><button className={styles.actionBtn} onClick={onContinueButton}>Continue</button>
+                        <button className={styles.cancelBtn}>Cancel</button></td>
+                       
                         </tr>
 
                 ))}
@@ -73,4 +77,4 @@ export default function Pending(){
 
         </>
     )
-}
+} 

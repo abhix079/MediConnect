@@ -1,0 +1,14 @@
+.mainContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+} 
+
+.registerContainer,.historyContainer{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 5vh;
+}

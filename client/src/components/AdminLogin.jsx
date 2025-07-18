@@ -1,4 +1,4 @@
-// StaffLogin.jsx
+
 import styles from "../styles/LoginPage.module.css";
 import logo from "../assets/logo.png";
 import { FaUser, FaLock } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function StaffLogin() {
+export default function AdminLogin() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -21,15 +21,15 @@ export default function StaffLogin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/staff", { userId, password });
+      const res = await axios.post("http://localhost:8000/api/admin", {
+        userId,
+        password,
+      });
+
       if (res.status === 200) {
+        localStorage.setItem("adminName", res.data.name || "Admin");
         toast.success("Login Successful");
-
-        // This will show the name on the navabar
-        
-        localStorage.setItem("staffName", res.data.name || "Receptionist");
-
-        navigate("/staff-dashboard");
+        navigate("/admin-dashboard");
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
@@ -46,7 +46,7 @@ export default function StaffLogin() {
       <div className={styles.loginCard}>
         <div className={styles.cardHeader}>
           <h2>Login to Continue</h2>
-          <p>Access your Staff dashboard</p>
+          <p>Access your Admin dashboard</p>
         </div>
 
         <form className={styles.inputContainer} onSubmit={handleLogin}>

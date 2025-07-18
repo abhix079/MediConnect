@@ -51,7 +51,7 @@ export default function Active({ onContinueButton }) {
             <th>Symptom / Reason</th>
             <th>Status</th>
             <th>Action</th>
-          </tr>
+          </tr> 
         </thead>
         <tbody>
           {appointments.map((appt, idx) => (

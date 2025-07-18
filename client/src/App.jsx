@@ -4,10 +4,10 @@ import { Toaster } from "react-hot-toast";
 import LandingPage from "./components/LandingPage";
 import DoctorLogin from "./components/DoctorLogin";
 import StaffLogin from "./components/StaffLogin";
-import PatientLogin from "./components/PatientLogin";
+import AdminLogin from "./components/AdminLogin";
 import DoctorDashboard from "./pages/doctor/DoctorDashboard";
 import StaffDashboard from "./pages/staff/StaffDashboard";
-import PatientDashboard from "./pages/patient/PatientDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 
 function App() {
@@ -22,10 +22,10 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/doctor-login" element={<DoctorLogin />} />
           <Route path="/staff-login" element={<StaffLogin />} />
-          <Route path="/patient-login" element={<PatientLogin />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/staff-dashboard" element={<StaffDashboard />} />
-          <Route path="/patient-dashboard" element={<PatientDashboard />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
          
         </Routes>
       </BrowserRouter>
