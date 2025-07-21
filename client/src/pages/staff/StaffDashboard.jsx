@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StaffNavbar from "./StaffNavbar";
 import RegisterPatient from "./RegisterPatient";
-import History from "../doctor/History";
+import AllHistory from "../staff/AllHistory"
 import styles from "../../styles/StaffDashboard.module.css";
 
 export default function StaffDashboard() {
@@ -23,7 +23,7 @@ export default function StaffDashboard() {
 
       {currentView === "history" && (
         <div className={styles.historyContainer}>
-          <History goBack={() => setCurrentView("register")} />
+          <AllHistory goBack={() => setCurrentView("register")} />
         </div>
       )}
     </div>

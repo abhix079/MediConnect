@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import LandingPage from "./components/LandingPage";
 import DoctorLogin from "./components/DoctorLogin";
@@ -19,7 +19,8 @@ function App() {
       <BrowserRouter>
        
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/login" element={<LandingPage/>} />
           <Route path="/doctor-login" element={<DoctorLogin />} />
           <Route path="/staff-login" element={<StaffLogin />} />
           <Route path="/admin-login" element={<AdminLogin />} />

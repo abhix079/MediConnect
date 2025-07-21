@@ -25,11 +25,21 @@ export default function LandingPage() {
           <Link to ="/doctor-login" ><button className={styles.roleButton}>Login as Doctor</button></Link>
           <Link to ="/staff-login" ><button className={styles.roleButton}>Login as Staff</button></Link>
           <Link to ="/admin-login" ><button className={styles.roleButton}>Login as Admin</button></Link>
+
           
          
         </div>
         <p className={styles.termsPara}>By continuing, you agree to our Terms of Service and Privacy Policy</p>
-      </div>
+        <p className={styles.patientText}> For patients only</p>
+       <form className={styles.patientLogin}> 
+        <input type="tel" name="" id="" placeholder="Enter registered Mobile number"/>
+       <button type="submit">Search</button>
+       </form>
+        
+        
+              </div>
+      
+       
        
     </>
   );

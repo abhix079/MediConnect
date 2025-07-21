@@ -69,3 +69,42 @@
     font-size: 13px;
     color:rgb(110, 109, 109) ;
 }
+
+
+.patientText{
+  margin-top: 20px;
+
+}
+.patientLogin{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  
+  
+}
+.patientLogin button{
+  padding: 7px 22px;
+  
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  background-color: #334776;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+}
+.patientLogin button:hover {
+  background-color: #2a3a5f;
+}
+.patientLogin input
+{
+  padding: 7px 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  outline: none;
+  width: 250px;
+}
