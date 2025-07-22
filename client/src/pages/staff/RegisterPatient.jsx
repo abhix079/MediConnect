@@ -42,7 +42,7 @@ export default function RegisterPatient({ goBack }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/patient/register", formData);
+      const res = await axios.post("http://localhost:8000/api/patients/register", formData);
       toast.success("Patient registered successfully");
 
       // Clear form

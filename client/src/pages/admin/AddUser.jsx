@@ -55,36 +55,36 @@ export default function AddUser() {
           <div className={styles.row}>
             <div>
               <label htmlFor="firstName">First Name</label>
-              <input type="text" id="firstName" value={formData.firstName} onChange={handleChange} required />
+              <input type="text" id="firstName" value={formData.firstName} onChange={handleChange}  placeholder="Firstname" required />
             </div>
 
             <div>
               <label htmlFor="lastName">Last Name</label>
-              <input type="text" id="lastName" value={formData.lastName} onChange={handleChange} required />
+              <input type="text" id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Lastname" required />
             </div>
           </div>
 
           <div className={styles.row}>
             <div>
               <label htmlFor="age">Age</label>
-              <input type="number" id="age" value={formData.age} onChange={handleChange} required />
+              <input type="number" id="age" value={formData.age} onChange={handleChange} placeholder="Enter your age" required />
             </div>
 
             <div>
               <label htmlFor="phone">Phone</label>
-              <input type="text" id="phone" value={formData.phone} onChange={handleChange} required />
+              <input type="text" id="phone" value={formData.phone} onChange={handleChange} placeholder="Phone number" required />
             </div>
           </div>
 
           <div>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={formData.email} onChange={handleChange} required />
+            <input type="email" id="email" value={formData.email} onChange={handleChange} placeholder="Enter your e-mail" required />
           </div>
 
           <div className={styles.row}>
             <div>
               <label htmlFor="department">Department</label>
-              <input type="text" id="department" value={formData.department} onChange={handleChange} required />
+              <input type="text" id="department" value={formData.department} onChange={handleChange} placeholder="Enter department based on role" required />
             </div>
 
             <div>
@@ -111,7 +111,7 @@ export default function AddUser() {
           <div className={styles.row}>
             <div>
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" value={formData.password} onChange={handleChange} required />
+              <input type="password" id="password" value={formData.password} onChange={handleChange} placeholder="Enter strong password" required />
             </div>
           </div>
 
