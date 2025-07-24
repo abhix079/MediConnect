@@ -43,3 +43,24 @@ export const getAllPatient = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch patients" });
   }
 };
+
+
+//get patient based on the doctor
+
+export const getDoctorPatient = async (req, res) => {
+  try {
+    const doctorId = req.user?.userId;
+
+    if (!doctorId) {
+      return res.status(400).json({ message: "Doctor userId not found in request" });
+    }
+
+    // Fetch patients referred by the logged-in doctor
+    const patients = await Patient.find({ referredBy: doctorId });
+
+    res.status(200).json(patients);
+  } catch (error) {
+    console.error("Error fetching patients:", error);
+    res.status(500).json({ message: "Failed to fetch patients" });
+  }
+};

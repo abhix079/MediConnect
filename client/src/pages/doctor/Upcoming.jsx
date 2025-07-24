@@ -1,62 +1,24 @@
+import { useEffect, useState } from "react";
 import styles from "../../styles/Appointment.module.css";
+import axios from "axios";
 
 export default function Upcoming() {
-  const appointments = [
-    {
-      id: "P001",
-      name: "Aditya Kumar",
-      reason: "Fever and cold",
-      status: "Upcoming",
-    },
-    {
-      id: "P002",
-      name: "Ankit Mishra",
-      reason: "Back pain",
-      status: "Upcoming",
-    },
-    {
-      id: "P003",
-      name: "Abhishek ",
-      reason: "Headache",
-      status: "Upcoming",
-    },
-    {
-      id: "P004",
-      name: "Abhay Singh ",
-      reason: "Dizziness",
-      status: "Upcoming",
-    },
-    {
-      id: "P005",
-      name: "Adarsh Verma ",
-      reason: "Back Pain",
-      status: "Upcoming",
-    },
-    {
-      id: "P006",
-      name: "Ananya Srivastava ",
-      reason: "Fever and Cold",
-      status: "Upcoming",
-    },
-    {
-      id: "P007",
-      name: "Anishka Srivastava ",
-      reason: "Viral Fever",
-      status: "Upcoming",
-    },
-    {
-      id: "P008",
-      name: "Aditya Singh ",
-      reason: "Vomitting",
-      status: "Upcoming",
-    },
-    {
-      id: "P009",
-      name: "Nitish Rana ",
-      reason: "Elbow Fracture",
-      status: "Upcoming",
-    }
-  ];
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const token = localStorage.getItem("token");
+      const res = await axios.get("http://localhost:8000/api/patients/getPatient", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAppointments(res.data);
+    };
+
+    fetchAppointments();
+  }, []);
+
   return (
     <>
       <table className={styles.appointmentTable}>
@@ -67,20 +29,18 @@ export default function Upcoming() {
             <th>Patient Name</th>
             <th>Symptom / Reason</th>
             <th>Status</th>
-           
           </tr>
         </thead>
         <tbody>
           {appointments.map((appt, idx) => (
-            <tr key={appt.id}>
+            <tr key={appt._id}>
               <td>{idx + 1}</td>
-              <td>{appt.id}</td>
+              <td>{appt.patientId}</td>
               <td>{appt.name}</td>
               <td>{appt.reason}</td>
               <td>
                 <p className={styles.upcomingStatus}>{appt.status}</p>
               </td>
-
             </tr>
           ))}
         </tbody>

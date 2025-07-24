@@ -16,7 +16,7 @@ const doctorLogin = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // ✅ Send name in response
+    // Send name in response
     res.status(200).json({
       message: "Doctor login successful",
       name: user.firstName, //this is used to set the name in the navbar

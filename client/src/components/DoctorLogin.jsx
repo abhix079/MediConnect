@@ -37,8 +37,8 @@ export default function DoctorLogin() {
       toast.error(err.response?.data?.message || "Login failed");
     }
   };
-
-  return (
+ 
+  return ( 
     <div className={styles.mainContainer}>
       <div className={styles.logoContainer}>
         <img src={logo} className={styles.logo} alt="logo" />

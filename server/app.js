@@ -15,16 +15,16 @@ const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
-
+ 
 app.get("/", (req, res) => {
   res.send("Hello from server");
 });
 
 app.use("/api", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/patients", patientRoutes); // updated path
+app.use("/api/patients", patientRoutes); 
 app.use("/api", doctorRoutes);
-
+ 
 app.listen(PORT, () => {
   console.log(`Server running on PORT: ${PORT}`);
 });
