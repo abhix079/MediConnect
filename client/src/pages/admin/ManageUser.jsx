@@ -1,4 +1,3 @@
-// src/components/ManageUser.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../../styles/ManageUser.module.css";
@@ -18,6 +17,18 @@ export default function ManageUser({ goBack }) {
       }
     } catch (err) {
       console.error("Error fetching users:", err.message);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      console.log("Deleting user with ID:", userId);
+      const res = await axios.delete(`http://localhost:8000/api/users/${userId}`);
+      if (res.status === 200) {
+        fetchUsers(); // Refresh list
+      }
+    } catch (err) {
+      console.error("Error deleting user:", err.response?.data || err.message);
     }
   };
 
@@ -52,8 +63,7 @@ export default function ManageUser({ goBack }) {
               <td>{user.userId}</td>
               <td>{user.firstName} {user.lastName}</td>
               <td>
-                <p
-                  className={
+                <p className={
                     user.role === "Staff"
                       ? styles.staffStatus
                       : user.role === "Doctor"
@@ -69,7 +79,12 @@ export default function ManageUser({ goBack }) {
               <td>{user.phone}</td>
               <td>
                 <button className={styles.actionBtn}>Edit</button>
-                <button className={styles.removeBtn}>Remove</button>
+                <button
+                  className={styles.removeBtn}
+                  onClick={() => handleDeleteUser(user._id)}
+                >
+                  Remove
+                </button>
               </td>
             </tr>
           ))}

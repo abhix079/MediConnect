@@ -23,10 +23,13 @@ export default function AddUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post("http://localhost:8000/api/users/addUser", formData);
-      toast.success("User Added Successfully");
+      const { token, userId } = res.data;
+
+      localStorage.setItem("token", token); // ✅ store token
+      toast.success("User added successfully");
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -40,7 +43,7 @@ export default function AddUser() {
       });
     } catch (error) {
       console.error(error);
-      toast.error("Failed to add User")
+      toast.error(error.response?.data?.message || "Failed to add user");
     }
   };
 
@@ -55,9 +58,8 @@ export default function AddUser() {
           <div className={styles.row}>
             <div>
               <label htmlFor="firstName">First Name</label>
-              <input type="text" id="firstName" value={formData.firstName} onChange={handleChange}  placeholder="Firstname" required />
+              <input type="text" id="firstName" value={formData.firstName} onChange={handleChange} placeholder="Firstname" required />
             </div>
-
             <div>
               <label htmlFor="lastName">Last Name</label>
               <input type="text" id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Lastname" required />
@@ -67,9 +69,8 @@ export default function AddUser() {
           <div className={styles.row}>
             <div>
               <label htmlFor="age">Age</label>
-              <input type="number" id="age" value={formData.age} onChange={handleChange} placeholder="Enter your age" required />
+              <input type="number" id="age" value={formData.age} onChange={handleChange} placeholder="Age" required />
             </div>
-
             <div>
               <label htmlFor="phone">Phone</label>
               <input type="text" id="phone" value={formData.phone} onChange={handleChange} placeholder="Phone number" required />
@@ -78,15 +79,14 @@ export default function AddUser() {
 
           <div>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={formData.email} onChange={handleChange} placeholder="Enter your e-mail" required />
+            <input type="email" id="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
           </div>
 
           <div className={styles.row}>
             <div>
               <label htmlFor="department">Department</label>
-              <input type="text" id="department" value={formData.department} onChange={handleChange} placeholder="Enter department based on role" required />
+              <input type="text" id="department" value={formData.department} onChange={handleChange} placeholder="Department" required />
             </div>
-
             <div>
               <label htmlFor="role">Role</label>
               <select id="role" value={formData.role} onChange={handleChange} required>
@@ -104,14 +104,14 @@ export default function AddUser() {
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-              <option value="Others">Others</option>
+              <option value="Other">Other</option> {/* ✅ FIXED */}
             </select>
           </div>
 
           <div className={styles.row}>
             <div>
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" value={formData.password} onChange={handleChange} placeholder="Enter strong password" required />
+              <input type="password" id="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
             </div>
           </div>
 
