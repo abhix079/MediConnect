@@ -1,7 +1,5 @@
 import express from "express";
-import doctorLogin from "../controllers/doctorLogin.js";
-import staffLogin from "../controllers/staffLogin.js";
-import adminLogin from "../controllers/adminLogin.js";
+import { doctorLogin,staffLogin,adminLogin } from "../controllers/authController.js";
 
 const router = express.Router();
 

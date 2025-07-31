@@ -13,7 +13,7 @@ const generateUserId = async (role) => {
       break;
     case "Admin":
       prefix += "A";
-      break;
+      break; 
     default:
       throw new Error("Invalid role");
   }
@@ -50,20 +50,16 @@ const addNewUser = async (req, res) => {
       gender,
     });
 
+ 
     await newUser.save();
 
-    const token = jwt.sign(
-      { id: newUser._id, role: newUser.role },
-      process.env.JWT_SECRET || "your-secret-key",
-      { expiresIn: "2h" }
-    );
-
-    res.status(201).json({ message: "User created successfully", userId, token });
+    res.status(201).json({ message: "User created successfully", userId });
   } catch (err) {
     console.error("Error in adding user:", err.message);
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 const getAllUser = async (req, res) => {
   try {
@@ -76,23 +72,6 @@ const getAllUser = async (req, res) => {
   }
 };
 
-// DELETE a user by ID
-const deleteUserById = async (req, res) => {
-  try {
-    const userId = req.params.id;
-
-    const deletedUser = await User.findByIdAndDelete(userId);
-
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({ message: "User deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
 
 
-export { addNewUser, getAllUser, deleteUserById };
+export { addNewUser, getAllUser };
