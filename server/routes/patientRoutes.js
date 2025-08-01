@@ -8,4 +8,5 @@ router.post("/register", registerPatient);
 router.get("/getAllPatient", getAllPatient);
 
 
+
 export default router;
