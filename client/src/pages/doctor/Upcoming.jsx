@@ -10,7 +10,7 @@ export default function Upcoming() {
       const token = localStorage.getItem("token");
       const res = await axios.get("http://localhost:8000/api/patients/getPatient", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${zztoken}`,
         },
       });
       setAppointments(res.data);
