@@ -33,7 +33,7 @@ export default function LandingPage() {
         <p className={styles.patientText}> For patients only</p>
        <form className={styles.patientLogin}> 
         <input type="tel" name="" id="" placeholder="Enter registered Mobile number"/>
-       <button type="submit">Search</button>
+      <Link to ="/patient-dashboard" > <button type="submit">Search</button></Link>
        </form>
         
         
