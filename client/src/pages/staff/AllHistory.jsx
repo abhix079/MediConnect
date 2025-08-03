@@ -44,9 +44,10 @@ export default function History({ goBack }) {
       <table className={styles.appointmentTable}>
         <thead>
           <tr>
-            <th>S.no</th>
+        
             <th>Patient ID</th>
             <th>Patient Name</th>
+            <th>Mobile No.</th>
             <th>Referred By</th>
             <th>Symptom / Reason</th>
             <th>Status</th>
@@ -55,9 +56,10 @@ export default function History({ goBack }) {
         <tbody>
           {appointments.map((appt, idx) => (
             <tr key={appt._id}>
-              <td>{idx + 1}</td>
+              
               <td>{appt.patientId}</td>
               <td>{appt.name}</td>
+              <td>{appt.mobile}</td>
               <td>{appt.referredBy}</td>
               <td>{appt.reason}</td>
               <td>

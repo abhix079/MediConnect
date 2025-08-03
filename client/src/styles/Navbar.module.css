@@ -24,14 +24,14 @@
   border-radius: 7px;
   color: white;
   cursor: pointer;
-  
 }
 
 .btn:hover {
   background-color: rgb(240, 9, 9);
 }
 
-.item,.userGreeting {
+.item,
+.userGreeting {
   cursor: pointer;
   padding: 6px 15px;
   background-color: rgb(233, 236, 255);
@@ -41,12 +41,21 @@
 
 .item:hover {
   background-color: rgb(167, 179, 247);
-
 }
 
 .active {
   background-color: rgb(129, 142, 218);
-
 }
 
+@media (min-width: 300px) and (max-width: 500px) {
+  .navContainer {
+    padding: 11px 3vw;
+  }
+.navItems{
+  font-size: 15px;
+}
+.btn{
+  padding: 5px 9px;
+}
 
+}

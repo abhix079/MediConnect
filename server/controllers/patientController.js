@@ -47,32 +47,24 @@ export const getAllPatient = async (req, res) => {
 };
 
 //this is the controller that patient will use to see all the appointment history...................
-
 export const getPatientDetail = async (req, res) => {
-  const { mobile } = req.body;
+  // Support query param ?mobile=...
+  const mobile = req.query.mobile || req.body.mobile;
+
+  if (!mobile) {
+    return res.status(400).json({ message: "Mobile number is required" });
+  }
 
   try {
-
-    const patient = await Patient.findOne({mobile});
-    if(!patient){
-      return res.status(500).json({
-        message:"No record found"
-      })
+    const patient = await Patient.findOne({ mobile });
+    if (!patient) {
+      return res.status(404).json({ message: "No record found" });
     }
 
-    res.status(200).json({
-      message:"Patient record found"
-    })
-
-
-  }
-  
-  
-  catch (err) {
-    console.log("Error in finding patient details", err.message);
-    res.status(500).json({
-      message: "Patient detail not found",
-    });
+    res.status(200).json({ message: "Patient record found", patient });
+  } catch (err) {
+    console.error("Error in finding patient details", err.message);
+    res.status(500).json({ message: "Patient detail not found", error: err.message });
   }
 };
 

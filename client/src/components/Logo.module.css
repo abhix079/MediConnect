@@ -8,8 +8,7 @@
     margin-right: 25px;
    
 }
-.logo{ 
-    max-width: 155px;
+.logo{     max-width: 155px;
     height:auto;
     object-fit: contain;
 }
@@ -21,4 +20,16 @@
 }
 .logoContainer span{
     color: #334776;
+}
+
+
+@media (min-width:300px)  and (max-width:500px){
+    .logo{
+        max-width: 130px;
+    }
+    .logoContainer p{
+  font-weight:575;
+    font-size: 9.2px;
+}
+  
 }

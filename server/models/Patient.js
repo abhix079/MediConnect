@@ -11,6 +11,7 @@ const patientSchema = new mongoose.Schema({
   gender: String,
   mobile: String,
   reason: String,
+  
   referredBy: String,
   address: String,
   status: {
