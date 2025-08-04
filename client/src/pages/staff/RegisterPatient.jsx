@@ -14,7 +14,8 @@ export default function RegisterPatient({ goBack }) {
     mobile: "",
     reason: "",
     referredBy: "",
-    address: ""
+    address: "",
+    prescription: ""
   });
 
   useEffect(() => {
@@ -53,7 +54,8 @@ export default function RegisterPatient({ goBack }) {
         mobile: "",
         reason: "",
         referredBy: "",
-        address: ""
+        address: "",
+        prescription: ""
       });
     } catch (error) {
       const errMsg = error.response?.data?.message || "Failed to register patient";
@@ -64,7 +66,6 @@ export default function RegisterPatient({ goBack }) {
 
   return (
     <div className={styles.mainContainer}>
-    
       <div className={styles.topContent}>
         <h2>Register Patient</h2>
       </div>
@@ -102,31 +103,33 @@ export default function RegisterPatient({ goBack }) {
             />
           </div>
 
-          <div className={styles.formGroup}>
-            <label>Age:</label>
-            <input
-              type="number"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              placeholder="Enter age"
-              required
-            />
-          </div>
+          <div className={styles.ageContainer}>
+            <div className={styles.formGroup}>
+              <label>Age:</label>
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                placeholder="Enter age"
+                required
+              />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Gender:</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
+            <div className={styles.formGroup}>
+              <label>Gender:</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
           </div>
 
           <div className={styles.formGroup}>
@@ -137,6 +140,17 @@ export default function RegisterPatient({ goBack }) {
               value={formData.mobile}
               onChange={handleChange}
               placeholder="Enter mobile number"
+              required
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label>Email ID:</label>
+            <input
+              type="tel"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email Address"
               required
             />
           </div>
@@ -172,15 +186,25 @@ export default function RegisterPatient({ goBack }) {
           </div>
 
           <div className={styles.formGroup}>
+            <label>Prescription:</label>
+            <input
+              name="prescription"
+              value={formData.prescription}
+              onChange={handleChange}
+              placeholder="Enter prescription"
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
             <label>Address:</label>
             <input
               name="address"
               value={formData.address}
               onChange={handleChange}
               placeholder="Enter address"
-              
               required
-            ></input>
+            />
           </div>
 
           <button type="submit" className={styles.btn}>

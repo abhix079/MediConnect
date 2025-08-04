@@ -20,6 +20,19 @@ border-radius: 10px;
     border-left: 5px solid rgb(101, 117, 207);
     border-radius: 5px;
 }
+
+.ageContainer {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.ageContainer .formGroup {
+  flex: 1;
+  min-width: 0;
+}
+
+
 /* 
 .btn {
     font-size: 16px;

@@ -10,9 +10,13 @@ const patientSchema = new mongoose.Schema({
   age: Number,
   gender: String,
   mobile: String,
+  email: String,
   reason: String,
-  
   referredBy: String,
+  prescription: {
+    type: String,
+    default: "NA",
+  },
   address: String,
   status: {
     type: String,

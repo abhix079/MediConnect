@@ -11,7 +11,7 @@ const generatePatientId = async () => {
 export const registerPatient = async (req, res) => {
   try {
     const patientId = await generatePatientId();
-    const { name, age, gender, mobile, reason, referredBy, address } = req.body;
+    const { name, age, gender, mobile, reason, referredBy, address, prescription } = req.body;
 
     const patient = new Patient({
       patientId,
@@ -22,6 +22,7 @@ export const registerPatient = async (req, res) => {
       reason,
       referredBy,
       address,
+      prescription, // will fall back to schema default if undefined
       status: "Upcoming", // Set default status here
     });
 
@@ -46,7 +47,7 @@ export const getAllPatient = async (req, res) => {
   }
 };
 
-//this is the controller that patient will use to see all the appointment history...................
+// this is the controller that patient will use to see all the appointment history
 export const getPatientDetail = async (req, res) => {
   // Support query param ?mobile=...
   const mobile = req.query.mobile || req.body.mobile;
@@ -68,11 +69,13 @@ export const getPatientDetail = async (req, res) => {
   }
 };
 
-//get patients based on the doctor.................................................................................
+// get patients based on the doctor.................................................................................
 
 export const getPatientByDoctor = async (req, res) => {
   try {
+    const { doctorId } = req.params; // assuming doctorId comes from params
     const patients = await Patient.find({ referredBy: doctorId });
+    res.status(200).json(patients);
   } catch (err) {
     console.log("Error in fetching the patients based on doctor", err.message);
     res.status(500).json({

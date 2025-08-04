@@ -9,6 +9,7 @@ import userRoutes from "./routes/userRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 
+
 dotenv.config();
 
 const app = express();
@@ -34,7 +35,10 @@ connectDB();
 
 app.get("/", (req, res) => {
   res.send("Hello from server");
+
 });
+
+
 
 //my custom routes
 
