@@ -1,4 +1,6 @@
+// controllers/patientController.js
 import Patient from "../models/Patient.js";
+import sendEmail from "../utils/sendEmail.js";
 
 // Auto-generate patient ID
 const generatePatientId = async () => {
@@ -7,11 +9,23 @@ const generatePatientId = async () => {
   return `P0MC${idNumber}`;
 };
 
-// Register Patient........................this is for the staff
+// Register Patient (for staff)
 export const registerPatient = async (req, res) => {
   try {
     const patientId = await generatePatientId();
-    const { name, age, gender, mobile, reason, referredBy, address, prescription } = req.body;
+    const {
+      name,
+      age,
+      gender,
+      mobile,
+      reason,
+      referredBy,
+      address,
+      prescription,
+      email
+    } = req.body;
+
+   
 
     const patient = new Patient({
       patientId,
@@ -22,34 +36,42 @@ export const registerPatient = async (req, res) => {
       reason,
       referredBy,
       address,
-      prescription, // will fall back to schema default if undefined
-      status: "Upcoming", // Set default status here
+      email,
+      prescription,
+      status: "Upcoming"
     });
 
     await patient.save();
-    res.status(201).json(patient);
+
+    // ✅ Send email using NodeMailer
+    const subject = "Appointment Confirmation - MediConnect";
+    const message = `Dear ${name},\n\nYour appointment has been successfully registered with Dr. ${referredBy}\n\nPatient ID: ${patientId}\nReason: ${reason}\n\nThank you,\nMediConnect Team`;
+
+    await sendEmail(email, subject, message);
+
+    res.status(201).json({ message: "Patient registered and email sent", patient });
   } catch (err) {
     console.error("Error registering patient:", err);
-    res
-      .status(500)
-      .json({ message: "Failed to register patient", error: err.message });
+
+   
+
+    res.status(500).json({ message: "Failed to register patient", error: err.message });
   }
 };
 
-// Get all patients  ------this is for the staff ...........................
+// Get all patients (for staff)
 export const getAllPatient = async (req, res) => {
   try {
     const patients = await Patient.find();
     res.status(200).json(patients);
   } catch (error) {
     console.error("Error fetching patients:", error);
-    res.status(500).js;
+    res.status(500).json({ message: "Failed to fetch patients" });
   }
 };
 
-// this is the controller that patient will use to see all the appointment history
+// Get patient detail (for patient)
 export const getPatientDetail = async (req, res) => {
-  // Support query param ?mobile=...
   const mobile = req.query.mobile || req.body.mobile;
 
   if (!mobile) {
@@ -69,11 +91,10 @@ export const getPatientDetail = async (req, res) => {
   }
 };
 
-// get patients based on the doctor.................................................................................
-
+// Get patients based on doctor
 export const getPatientByDoctor = async (req, res) => {
   try {
-    const { doctorId } = req.params; // assuming doctorId comes from params
+    const { doctorId } = req.params;
     const patients = await Patient.find({ referredBy: doctorId });
     res.status(200).json(patients);
   } catch (err) {
