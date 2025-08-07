@@ -12,6 +12,7 @@ export default function RegisterPatient({ goBack }) {
     age: "",
     gender: "",
     mobile: "",
+    email: "",
     reason: "",
     referredBy: "",
     address: "",
@@ -44,7 +45,8 @@ export default function RegisterPatient({ goBack }) {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:8000/api/patients/register", formData);
-      toast.success("Patient registered successfully");
+
+      toast.success("Appointment confirmed and email sent");
 
       // Clear form
       setFormData({
@@ -52,6 +54,7 @@ export default function RegisterPatient({ goBack }) {
         age: "",
         gender: "",
         mobile: "",
+        email: "",
         reason: "",
         referredBy: "",
         address: "",
@@ -59,7 +62,7 @@ export default function RegisterPatient({ goBack }) {
       });
     } catch (error) {
       const errMsg = error.response?.data?.message || "Failed to register patient";
-      toast.error(`${errMsg}`);
+      toast.error(errMsg);
       console.error(error);
     }
   };
@@ -143,14 +146,15 @@ export default function RegisterPatient({ goBack }) {
               required
             />
           </div>
+
           <div className={styles.formGroup}>
             <label>Email ID:</label>
             <input
-              type="tel"
+              type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email Address"
+              placeholder="Enter email address"
               required
             />
           </div>

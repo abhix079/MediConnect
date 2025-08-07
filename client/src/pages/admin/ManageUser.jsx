@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 import styles from "../../styles/ManageUser.module.css";
 
 export default function ManageUser({ goBack }) {
@@ -22,11 +23,10 @@ export default function ManageUser({ goBack }) {
 
   const handleDeleteUser = async (userId) => {
     try {
-      console.log("Deleting user with ID:", userId);
-      const res = await axios.delete(`http://localhost:8000/api/users/${userId}`);
-      if (res.status === 200) {
-        fetchUsers(); // Refresh list
-      }
+      
+      const res = await axios.delete(`http://localhost:8000/api/users/delUser/${userId}`);
+     toast.success("User removed successfully");
+     fetchUsers();
     } catch (err) {
       console.error("Error deleting user:", err.response?.data || err.message);
     }

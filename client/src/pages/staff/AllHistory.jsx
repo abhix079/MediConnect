@@ -35,6 +35,10 @@ export default function History({ goBack }) {
     }
   };
 
+
+
+
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.topContent}>
