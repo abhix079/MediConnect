@@ -20,7 +20,7 @@ export default function DoctorLogin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/doctor", {
+      const res = await axios.post("https://mediconnect-server-tfit.onrender.com/api/doctor", {
         userId,
         password,
       });

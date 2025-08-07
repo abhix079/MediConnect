@@ -22,7 +22,7 @@ export default function RegisterPatient({ goBack }) {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/getDoctors");
+        const res = await axios.get("https://mediconnect-server-tfit.onrender.com/api/getDoctors");
         setDoctors(res.data);
       } catch (error) {
         toast.error("Failed to load doctors list");

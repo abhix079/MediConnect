@@ -24,7 +24,7 @@ export default function AddUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/users/addUser", formData);
+      const res = await axios.post("https://mediconnect-server-tfit.onrender.com/api/users/addUser", formData);
       const { token, userId } = res.data;
 
       localStorage.setItem("token", token); // ✅ store token

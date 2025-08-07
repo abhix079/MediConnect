@@ -21,7 +21,7 @@ export default function StaffLogin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/staff", { userId, password });
+      const res = await axios.post("https://mediconnect-server-tfit.onrender.com/api/staff", { userId, password });
       if (res.status === 200) {
         toast.success("Login Successful");
 

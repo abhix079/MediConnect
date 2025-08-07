@@ -21,7 +21,7 @@ export default function AdminLogin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/admin", {
+      const res = await axios.post("https://mediconnect-server-tfit.onrender.com/api/admin", {
         userId,
         password,
       });

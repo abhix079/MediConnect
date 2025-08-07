@@ -21,7 +21,7 @@ export default function PatientDashboard() {
 
     const fetchPatients = async () => {
       try {
-        const resp = await axios.get("http://localhost:8000/api/patients/patientDetail", {
+        const resp = await axios.get("https://mediconnect-server-tfit.onrender.com/api/patients/patientDetail", {
           params: { mobile },
         });
         // Handle both single and multiple records gracefully
