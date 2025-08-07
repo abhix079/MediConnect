@@ -73,5 +73,36 @@ const getAllUser = async (req, res) => {
 };
 
 
+// this is used to remove the user
 
-export { addNewUser, getAllUser };
+const removeUser= async(req,res)=>{
+  try{
+
+    const {id} = req.params;
+
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if(!deletedUser){
+      return res.status(500).json({
+        message:"User not found"
+      })
+    }
+
+    res.status(200).json({
+      message:"User removed successfully",
+      user:deletedUser
+    })
+
+
+  }
+
+  catch(err){
+    console.log("Error in removing user",err.message);
+    res.status(500).json({
+      message:"User not removed"
+    })
+  }
+}
+
+
+export { addNewUser, getAllUser,removeUser };

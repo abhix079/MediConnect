@@ -1,4 +1,3 @@
-// controllers/patientController.js
 import Patient from "../models/Patient.js";
 import sendEmail from "../utils/sendEmail.js";
 
@@ -22,10 +21,8 @@ export const registerPatient = async (req, res) => {
       referredBy,
       address,
       prescription,
-      email
+      email,
     } = req.body;
-
-   
 
     const patient = new Patient({
       patientId,
@@ -38,24 +35,33 @@ export const registerPatient = async (req, res) => {
       address,
       email,
       prescription,
-      status: "Upcoming"
+      status: "Upcoming",
     });
 
     await patient.save();
 
-    // ✅ Send email using NodeMailer
-    const subject = "Appointment Confirmation - MediConnect";
-    const message = `Dear ${name},\n\nYour appointment has been successfully registered with Dr. ${referredBy}\n\nPatient ID: ${patientId}\nReason: ${reason}\n\nThank you,\nMediConnect Team`;
+    // Send response immediately
+    res.status(201).json({ message: "Patient registered", patient });
 
-    await sendEmail(email, subject, message);
+    // Send email in the background
+    setImmediate(async () => {
+      const subject = "Appointment Confirmation - MediConnect";
+      const message = `Dear ${name},\n\nYour appointment has been successfully registered with Dr. ${referredBy}\n\nPatient ID: ${patientId}\nReason: ${reason}\n\nThank you,\nMediConnect Team`;
 
-    res.status(201).json({ message: "Patient registered and email sent", patient });
+      try {
+        await sendEmail(email, subject, message);
+        console.log("✅ Email sent successfully to", email);
+      } catch (emailErr) {
+        console.error("❌ Email sending failed:", emailErr.message);
+      }
+    });
+
   } catch (err) {
-    console.error("Error registering patient:", err);
-
-   
-
-    res.status(500).json({ message: "Failed to register patient", error: err.message });
+    console.error("❌ Error registering patient:", err.message);
+    res.status(500).json({
+      message: "Failed to register patient",
+      error: err.message,
+    });
   }
 };
 
@@ -65,12 +71,11 @@ export const getAllPatient = async (req, res) => {
     const patients = await Patient.find();
     res.status(200).json(patients);
   } catch (error) {
-    console.error("Error fetching patients:", error);
+    console.error("❌ Error fetching patients:", error.message);
     res.status(500).json({ message: "Failed to fetch patients" });
   }
 };
-
-// Get patient detail (for patient)
+// Get all patient records by mobile number
 export const getPatientDetail = async (req, res) => {
   const mobile = req.query.mobile || req.body.mobile;
 
@@ -79,15 +84,22 @@ export const getPatientDetail = async (req, res) => {
   }
 
   try {
-    const patient = await Patient.findOne({ mobile });
-    if (!patient) {
-      return res.status(404).json({ message: "No record found" });
+    const patients = await Patient.find({ mobile });
+
+    if (!patients || patients.length === 0) {
+      return res.status(404).json({ message: "No records found for this mobile number" });
     }
 
-    res.status(200).json({ message: "Patient record found", patient });
+    res.status(200).json({
+      message: "Patient records found",
+      patients, // returns array of patient objects
+    });
   } catch (err) {
-    console.error("Error in finding patient details", err.message);
-    res.status(500).json({ message: "Patient detail not found", error: err.message });
+    console.error("❌ Error in finding patient details:", err.message);
+    res.status(500).json({
+      message: "Failed to fetch patient details",
+      error: err.message,
+    });
   }
 };
 
@@ -98,7 +110,7 @@ export const getPatientByDoctor = async (req, res) => {
     const patients = await Patient.find({ referredBy: doctorId });
     res.status(200).json(patients);
   } catch (err) {
-    console.log("Error in fetching the patients based on doctor", err.message);
+    console.log("❌ Error in fetching patients based on doctor:", err.message);
     res.status(500).json({
       message: "Patient not found based on the doctor",
     });

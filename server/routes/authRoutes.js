@@ -7,5 +7,5 @@ router.post("/doctor", doctorLogin);
 router.post("/staff", staffLogin);
 router.post("/admin", adminLogin);
 
-export default router;
+export default router; 
  
