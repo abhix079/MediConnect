@@ -32,9 +32,20 @@ const patientSchema = new mongoose.Schema(
       required: true,
     },
     referredBy: {
-      type: String,
-      required: true,
-    },
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+    }, // Added missing closing brace and comma
     prescription: {
       type: String,
       default: "NA",

@@ -51,7 +51,7 @@ export default function History({ goBack }) {
         
             <th>Patient ID</th>
             <th>Patient Name</th>
-            <th>Mobile No.</th>
+            <th>Mobile No.</th> 
             <th>Referred By</th>
             <th>Symptom / Reason</th>
             <th>Status</th>
@@ -64,7 +64,7 @@ export default function History({ goBack }) {
               <td>{appt.patientId}</td>
               <td>{appt.name}</td>
               <td>{appt.mobile}</td>
-              <td>{appt.referredBy}</td>
+              <td>{appt.referredBy?.firstName}</td>
               <td>{appt.reason}</td>
               <td>
                 <p className={getStatusClass(appt.status)}>

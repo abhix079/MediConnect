@@ -15,6 +15,18 @@ export default function DoctorNavbar({
     setDoctorName(name);
   }, []);
 
+  // ✅ Proper logout function that removes all stored data
+  const handleLogout = () => {
+    // Remove all authentication-related data from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("doctorName");
+    localStorage.removeItem("userRole");
+   
+    
+    // Redirect to login/home page
+    window.location.href = "/";
+  };
+
   return (
     <div className={styles.navContainer}>
       <div className={styles.navItems}>
@@ -38,12 +50,10 @@ export default function DoctorNavbar({
       </div>
 
       <div className={styles.navItems}>
-        <p className={styles.userGreeting}>Welcome  Dr. {doctorName}</p>
-        <p className={styles.btn} onClick={()=>{
-          localStorage.removeItem("doctorName");
-          window.location.href = "/";
-        }
-        }>Logout</p>
+        <p className={styles.userGreeting}>Welcome Dr. {doctorName}</p>
+        <p className={styles.btn} onClick={handleLogout}>
+          Logout
+        </p>
       </div>
     </div>
   );

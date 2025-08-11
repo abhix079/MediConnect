@@ -20,29 +20,48 @@ export default function DoctorLogin() {
     }
 
     try {
-      const res = await axios.post("https://mediconnect-server-tfit.onrender.com/api/doctor", {
-        userId,
-        password,
-      });
+      const res = await axios.post(
+        "https://mediconnect-server-tfit.onrender.com/api/doctor",
+        {
+          userId,
+          password,
+        }
+      );
 
       if (res.status === 200) {
         toast.success("Login Successful");
 
-        //  Store doctor's name in localStorage
+        // here saving te token
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+        } else {
+          console.error("No token in response!");
+          toast.error("Login failed - no token received");
+          return;
+        }
+
+        // Save doctor's name
         localStorage.setItem("doctorName", res.data.name || "Doctor");
+        localStorage.setItem("userRole", "Doctor");
+
+        // Verify token was saved
+        const savedToken = localStorage.getItem("token");
 
         navigate("/doctor-dashboard");
       }
     } catch (err) {
+      console.error("Login error:", err);
       toast.error(err.response?.data?.message || "Login failed");
     }
   };
- 
-  return ( 
+
+  return (
     <div className={styles.mainContainer}>
       <div className={styles.logoContainer}>
         <img src={logo} className={styles.logo} alt="logo" />
-        <p><span>Connecting The</span> Pharma World</p>
+        <p>
+          <span>Connecting The</span> Pharma World
+        </p>
       </div>
 
       <div className={styles.loginCard}>

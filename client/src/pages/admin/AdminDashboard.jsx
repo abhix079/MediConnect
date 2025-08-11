@@ -5,10 +5,7 @@ import AddUser from "./AddUser";
 import ManageUser from "./ManageUser";
 
 export default function DoctorDashboard() {
-
   const [currentView, setCurrentView] = useState("addUser");
-
- 
 
   return (
     <div className={styles.mainContainer}>
@@ -16,23 +13,19 @@ export default function DoctorDashboard() {
         onAddUser={() => setCurrentView("addUser")}
         onManageUser={() => setCurrentView("manageUser")}
         selected={currentView}
-      />
-
-     
+      /> 
 
       {currentView === "addUser" && (
         <div className={styles.addUserContainer}>
-         <AddUser/>
+          <AddUser />
         </div>
       )}
 
       {currentView === "manageUser" && (
         <div className={styles.manageUserContainer}>
-        
-          <ManageUser goBack={()=>setCurrentView("addUser")}/>
+          <ManageUser goBack={() => setCurrentView("addUser")} />
         </div>
       )}
     </div>
   );
 }
- 

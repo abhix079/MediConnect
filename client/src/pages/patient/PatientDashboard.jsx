@@ -21,9 +21,12 @@ export default function PatientDashboard() {
 
     const fetchPatients = async () => {
       try {
-        const resp = await axios.get("https://mediconnect-server-tfit.onrender.com/api/patients/patientDetail", {
-          params: { mobile },
-        });
+        const resp = await axios.get(
+          "https://mediconnect-server-tfit.onrender.com/api/patients/patientDetail",
+          {
+            params: { mobile },
+          }
+        );
         // Handle both single and multiple records gracefully
         const data = resp.data.patients || [resp.data.patient];
         setPatients(data.filter(Boolean)); // Remove nulls
@@ -36,6 +39,24 @@ export default function PatientDashboard() {
     fetchPatients();
   }, [mobile, navigate]);
 
+  const handleCancel = async (id) => {
+  try {
+    const resp = await axios.patch(
+      `http://localhost:8000/api/patients/${id}/cancel`
+    );
+    console.log(resp.data.message);
+
+    // Update state so the change appears instantly
+    setPatients((prev) =>
+      prev.map((p) =>
+        p._id === id ? { ...p, status: "Cancelled" } : p
+      )
+    );
+  } catch (err) {
+    console.error("Cancel failed:", err);
+  }
+};
+
   return (
     <div className={styles.mainContainer}>
       <PatientNavbar />
@@ -47,7 +68,9 @@ export default function PatientDashboard() {
             <div key={patient._id}>
               <div className={styles.topBar}>
                 <p className={styles.date}>
-                  {new Date(patient.updatedAt || patient.createdAt).toLocaleDateString()}
+                  {new Date(
+                    patient.updatedAt || patient.createdAt
+                  ).toLocaleDateString()}
                 </p>
                 <p className={styles.status}>{patient.status || "N/A"}</p>
               </div>
@@ -59,17 +82,20 @@ export default function PatientDashboard() {
                   <strong>Reason : </strong> {patient.reason || "N/A"}
                 </p>
                 <p>
-                  <strong>Prescription : </strong> {patient.prescription || "N/A"}
+                  <strong>Prescription : </strong>{" "}
+                  {patient.prescription || "N/A"}
                 </p>
               </div>
               <div className={styles.buttons}>
-                <button className={styles.actionBtn}>Reschedule Appointment</button>
-                <button className={styles.cancelBtn}>Cancel</button>
+                <button className={styles.actionBtn}>
+                  Reschedule Appointment
+                </button>
+                <button className={styles.cancelBtn} onClick={()=>handleCancel(patient._id)}>Cancel</button>
               </div>
             </div>
           ))
         )}
       </div>
-    </div> 
+    </div>
   );
 }

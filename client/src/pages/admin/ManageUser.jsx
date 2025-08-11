@@ -24,7 +24,7 @@ export default function ManageUser({ goBack }) {
   const handleDeleteUser = async (userId) => {
     try {
       
-      const res = await axios.delete(`http://localhost:8000/api/users/delUser/${userId}`);
+      const res = await axios.delete(`https://mediconnect-server-tfit.onrender.com/api/users/delUser/${userId}`);
      toast.success("User removed successfully");
      fetchUsers();
     } catch (err) {

@@ -16,13 +16,15 @@ export default function RegisterPatient({ goBack }) {
     reason: "",
     referredBy: "",
     address: "",
-    prescription: ""
+    prescription: "",
   });
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("https://mediconnect-server-tfit.onrender.com/api/getDoctors");
+        const res = await axios.get(
+          "https://mediconnect-server-tfit.onrender.com/api/getDoctors"
+        );
         setDoctors(res.data);
       } catch (error) {
         toast.error("Failed to load doctors list");
@@ -37,14 +39,17 @@ export default function RegisterPatient({ goBack }) {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/patients/register", formData);
+      const res = await axios.post(
+        "http://localhost:8000/api/patients/register",
+        formData
+      );
 
       toast.success("Appointment confirmed and email sent");
 
@@ -58,10 +63,11 @@ export default function RegisterPatient({ goBack }) {
         reason: "",
         referredBy: "",
         address: "",
-        prescription: ""
+        prescription: "",
       });
     } catch (error) {
-      const errMsg = error.response?.data?.message || "Failed to register patient";
+      const errMsg =
+        error.response?.data?.message || "Failed to register patient";
       toast.error(errMsg);
       console.error(error);
     }
@@ -181,7 +187,7 @@ export default function RegisterPatient({ goBack }) {
             >
               <option value="">Select referring doctor</option>
               {doctors.map((doc) => (
-                <option key={doc._id} value={`${doc.firstName} ${doc.lastName}`}>
+                <option key={doc._id} value={doc._id}>
                   {doc.firstName} {doc.lastName}
                 </option>
               ))}

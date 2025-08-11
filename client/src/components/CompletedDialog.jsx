@@ -10,7 +10,7 @@ export default function CompletedDialog({ closeDialog }) {
       </div>
       <div className={styles.patientDetail}>
         <p className={styles.dialogHeadings}>Personal Details</p>
-        <div className={styles.personalDetail}>
+        <div className={styles.personalDetail}> 
           <div className={styles.leftSide}>
             <p><strong>Patient ID : </strong> P001</p>
             <p><strong>Name : </strong> Aditya Kumar</p>
