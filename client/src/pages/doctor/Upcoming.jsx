@@ -2,61 +2,75 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Appointment.module.css";
 import axios from "axios";
 
-export default function Upcoming() {
-  const [appointments, setAppointments] = useState([]);
-
+export default function Upcoming({ appointments, setAppointments, onActivate }) {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-        }
-
-        // Try different possible token keys
         let token =
           localStorage.getItem("token") ||
           localStorage.getItem("authToken") ||
           localStorage.getItem("doctorToken");
 
-        if (!token) {
-          setError("No token found. Please login again.");
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const doctorId = payload.id;
+        if (!doctorId) return;
 
-          return;
-        }
-
-        // Try to decode JWT token to get doctor ID
-        try {
-          const payload = JSON.parse(atob(token.split(".")[1]));
-
-          const doctorId = payload.id;
-
-          if (!doctorId) {
-            setError("Invalid token - no doctor ID found");
-
-            return;
+        const res = await axios.get(
+          `http://localhost:8000/api/patients/doctor/${doctorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-
-          const res = await axios.get(
-            `http://localhost:8000/api/patients/doctor/${doctorId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          setAppointments(res.data);
-        } catch (decodeError) {
-          setError("Invalid token format");
-        }
+        );
+        
+        // Filter only upcoming patients
+        const upcomingPatients = res.data.filter(patient => patient.status === "Upcoming");
+        setAppointments(upcomingPatients);
       } catch (err) {
-        console.error("Error fetching appointments:", err);
-        console.error("Error response:", err.response?.data);
+        console.error("Error fetching appointments:", err); 
+        setAppointments([]);
       }
     };
 
     fetchAppointments();
-  }, []);
+  }, [setAppointments]);
+
+  const handleTurnIn = async (id) => {
+    try {
+      let token =
+        localStorage.getItem("token") ||
+        localStorage.getItem("authToken") ||
+        localStorage.getItem("doctorToken");
+
+      if (!token) {
+        alert("Please login again");
+        return;
+      }
+
+      const res = await axios.patch(
+        `http://localhost:8000/api/patients/${id}/active`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      alert(res.data.message);
+
+      // Find activated patient
+      const activatedPatient = appointments.find((appt) => appt._id === id);
+
+      // Remove from Upcoming list here to avoid double state management in parent
+      setAppointments((prev) => prev.filter((appt) => appt._id !== id));
+
+      // Notify parent to add patient to Active list
+      if (onActivate && activatedPatient) {
+        onActivate(activatedPatient);
+      }
+    } catch (error) {
+      console.error("Failed to update status", error);
+      alert("Failed to update status");
+    }
+  };
 
   return (
     <>
@@ -73,6 +87,7 @@ export default function Upcoming() {
               <th>Patient Name</th>
               <th>Symptom / Reason</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,11 +100,20 @@ export default function Upcoming() {
                 <td>
                   <p className={styles.upcomingStatus}>{appt.status}</p>
                 </td>
+                <td>
+                  <button
+                    className={styles.actionBtn}
+                    onClick={() => handleTurnIn(appt._id)}
+                  >
+                    Turn In
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
     </>
-  );
-}
+  )}
+
+  

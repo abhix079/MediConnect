@@ -4,7 +4,8 @@ import {
   getAllPatient,
   getPatientDetail,
   updateStatus,
-  getPatientByDoctor, // ✅ Import the new controller
+  getPatientByDoctor,
+  activeStatus, // ✅ Import the new controller
 } from "../controllers/patientController.js";
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
@@ -19,7 +20,10 @@ router.get("/getAllPatient", getAllPatient);
 router.get("/patientDetail", getPatientDetail);
 
 // Cancel patient status
-router.patch("/:id/cancel", updateStatus);
+router.patch("/:id/cancel", updateStatus); 
+
+//Active patient status
+router.patch("/:id/active",activeStatus);   
 
 // ✅ Get patients referred to a specific doctor
 router.get("/doctor/:doctorId", verifyToken, getPatientByDoctor);

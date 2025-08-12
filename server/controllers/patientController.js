@@ -42,7 +42,7 @@ export const registerPatient = async (req, res) => {
       referredBy: {
         _id: doctor._id,
         firstName: doctor.firstName,
-        lastName: doctor.lastName
+        lastName: doctor.lastName,
       }, // store the full doctor object
       address,
       email,
@@ -67,7 +67,6 @@ export const registerPatient = async (req, res) => {
         console.error(" Email sending failed:", emailErr.message);
       }
     });
-
   } catch (err) {
     console.error(" Error registering patient:", err.message);
     res.status(500).json({
@@ -80,13 +79,18 @@ export const registerPatient = async (req, res) => {
 // Get all patients (for staff)
 export const getAllPatient = async (req, res) => {
   try {
-    const patients = await Patient.find().populate("referredBy", "firstName lastName");
+    const patients = await Patient.find().populate(
+      "referredBy",
+      "firstName lastName"
+    );
     res.status(200).json(patients);
   } catch (error) {
     console.error("❌ Error fetching patients:", error.message);
     res.status(500).json({ message: "Failed to fetch patients" });
   }
 };
+
+
 // Get all patient records by mobile number
 export const getPatientDetail = async (req, res) => {
   const mobile = req.query.mobile || req.body.mobile;
@@ -114,10 +118,8 @@ export const getPatientDetail = async (req, res) => {
     });
   }
 };
-
-
 // PATCH /api/patients/:id/cancel
-export const updateStatus = async(req,res) => {
+export const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedPatient = await Patient.findByIdAndUpdate(
@@ -128,14 +130,37 @@ export const updateStatus = async(req,res) => {
     if (!updatedPatient) {
       return res.status(404).json({ message: "Patient not found" });
     }
-    res.status(200).json({ message: "Appointment cancelled", patient: updatedPatient });
+    res
+      .status(200)
+      .json({ message: "Appointment cancelled", patient: updatedPatient });
   } catch (error) {
-    console.error("❌ Cancel error:", error.message);
+    console.error("Cancel error:", error.message);
     res.status(500).json({ message: "Failed to cancel appointment" });
   }
 };
+//PATCH /api/patients/:id/cancel
 
+export const activeStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      id,
+      {
+        status: "Active",
+      },
+      { new: true }
+    );
+    if (!updatedPatient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    res.status(200).json({ message: "Patient set to active status" });
+  } catch (err) {
+    console.error("Active error:", error.message);
+    res.status(500).json({ message: "Failed to set active appointment" });
+  }
+};
 
 // Get patients based on doctor
 export const getPatientByDoctor = async (req, res) => {
@@ -144,7 +169,9 @@ export const getPatientByDoctor = async (req, res) => {
     const patients = await Patient.find({ "referredBy._id": doctorId });
 
     if (!patients.length) {
-      return res.status(404).json({ message: "No patients found for this doctor" });
+      return res
+        .status(404)
+        .json({ message: "No patients found for this doctor" });
     }
 
     res.json(patients);

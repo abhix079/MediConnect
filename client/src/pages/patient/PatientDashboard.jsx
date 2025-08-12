@@ -27,9 +27,10 @@ export default function PatientDashboard() {
             params: { mobile },
           }
         );
-        // Handle both single and multiple records gracefully
-        const data = resp.data.patients || [resp.data.patient];
-        setPatients(data.filter(Boolean)); // Remove nulls
+
+        // Always take patients array from backend
+        const data = resp.data.patients || [];
+        setPatients(data);
       } catch (err) {
         console.error("Failed to fetch patient:", err);
         setPatients([]);
@@ -40,22 +41,22 @@ export default function PatientDashboard() {
   }, [mobile, navigate]);
 
   const handleCancel = async (id) => {
-  try {
-    const resp = await axios.patch(
-      `http://localhost:8000/api/patients/${id}/cancel`
-    );
-    console.log(resp.data.message);
+    try {
+      const resp = await axios.patch(
+        `http://localhost:8000/api/patients/${id}/cancel`
+      );
+      console.log(resp.data.message);
 
-    // Update state so the change appears instantly
-    setPatients((prev) =>
-      prev.map((p) =>
-        p._id === id ? { ...p, status: "Cancelled" } : p
-      )
-    );
-  } catch (err) {
-    console.error("Cancel failed:", err);
-  }
-};
+      // Update state so the change appears instantly
+      setPatients((prev) =>
+        prev.map((p) =>
+          p._id === id ? { ...p, status: "Cancelled" } : p
+        )
+      );
+    } catch (err) {
+      console.error("Cancel failed:", err);
+    }
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -76,7 +77,10 @@ export default function PatientDashboard() {
               </div>
               <div className={styles.centerDetail}>
                 <p>
-                  <strong>Referred By :</strong> {patient.referredBy || "N/A"}
+                  <strong>Referred By :</strong>{" "}
+                  {patient.referredBy?.firstName
+                    ? `${patient.referredBy.firstName} ${patient.referredBy.lastName}`
+                    : "N/A"}
                 </p>
                 <p>
                   <strong>Reason : </strong> {patient.reason || "N/A"}
@@ -90,7 +94,12 @@ export default function PatientDashboard() {
                 <button className={styles.actionBtn}>
                   Reschedule Appointment
                 </button>
-                <button className={styles.cancelBtn} onClick={()=>handleCancel(patient._id)}>Cancel</button>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={() => handleCancel(patient._id)}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           ))
