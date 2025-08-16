@@ -1,15 +1,8 @@
 import styles from "../../styles/Appointment.module.css";
 
 export default function Completed({ onViewButton }) {
-  const appointments = [
-    { id: "P001", name: "Aditya Kumar", reason: "Fever and cold", status: "Completed" },
-    { id: "P002", name: "Ankit Mishra", reason: "Back pain", status: "Completed" },
-    { id: "P003", name: "Abhishek", reason: "Headache", status: "Completed" },
-    { id: "P004", name: "Abhay Singh", reason: "Dizziness", status: "Completed" },
-    { id: "P005", name: "Adarsh Verma", reason: "Back Pain", status: "Completed" },
-    { id: "P006", name: "Aryan Gupta", reason: "Vomiting", status: "Completed" },
-  ];
 
+  
   return (
     <table className={styles.appointmentTable}>
       <thead>

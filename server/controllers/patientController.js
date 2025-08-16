@@ -138,7 +138,7 @@ export const updateStatus = async (req, res) => {
     res.status(500).json({ message: "Failed to cancel appointment" });
   }
 };
-//PATCH /api/patients/:id/cancel
+//PATCH /api/patients/:id/active
 
 export const activeStatus = async (req, res) => {
   try {
@@ -159,6 +159,33 @@ export const activeStatus = async (req, res) => {
   } catch (err) {
     console.error("Active error:", error.message);
     res.status(500).json({ message: "Failed to set active appointment" });
+  }
+};
+
+//comlete status
+export const completeStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      id,
+      {
+        status: "Completed",
+      },
+      { new: true }
+    );
+    
+    if (!updatedPatient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    res.status(200).json({ 
+      message: "Patient checkup completed successfully",
+      patient: updatedPatient 
+    });
+  } catch (err) {
+    console.error("Complete status error:", err.message);
+    res.status(500).json({ message: "Failed to complete patient checkup" });
   }
 };
 

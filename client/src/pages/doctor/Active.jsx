@@ -1,6 +1,45 @@
+import { useEffect, useState } from "react";
 import styles from "../../styles/Appointment.module.css";
+import axios from "axios";
 
-export default function Active({ appointments, onContinueButton }) {
+export default function Active({ appointments, setAppointments, onContinueButton }) {
+  useEffect(() => {
+    const fetchActiveAppointments = async () => {
+      try {
+        let token =
+          localStorage.getItem("token") ||
+          localStorage.getItem("authToken") ||
+          localStorage.getItem("doctorToken");
+
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const doctorId = payload.id;
+        if (!doctorId) return;
+
+        const res = await axios.get(
+          `http://localhost:8000/api/patients/doctor/${doctorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        
+        // Filter only active patients
+        const activePatients = res.data.filter(patient => patient.status === "Active");
+        setAppointments(activePatients);
+      } catch (err) {
+        console.error("Error fetching active appointments:", err); 
+        setAppointments([]);
+      }
+    };
+
+    fetchActiveAppointments();
+  }, [setAppointments]);
+
+  const handleContinueClick = (patient) => {
+    onContinueButton(patient);
+  };
+
   return (
     <>
       {appointments.length === 0 ? (
@@ -28,7 +67,10 @@ export default function Active({ appointments, onContinueButton }) {
                   <p className={styles.activeStatus}>{appt.status}</p>
                 </td>
                 <td>
-                  <button className={styles.actionBtn} onClick={onContinueButton}>
+                  <button 
+                    className={styles.actionBtn} 
+                    onClick={() => handleContinueClick(appt)}
+                  >
                     Continue
                   </button>
                 </td>

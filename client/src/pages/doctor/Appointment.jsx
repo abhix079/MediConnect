@@ -12,25 +12,31 @@ export default function Appointment({ goBack }) {
   const [activeTab, setActiveTab] = useState("upcoming");
   const [showDialog, setShowDialog] = useState(false);
   const [dialogType, setDialogType] = useState(""); 
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
-  // State for appointments data (initially empty, Upcoming will fetch)
+  // Separate state for each tab
   const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [activeAppointments, setActiveAppointments] = useState([]);
 
-  // When 'Turn In' button clicked in Upcoming, this moves patient to Active list
+  // When 'Turn In' button clicked in Upcoming
   const handleActivate = (patient) => {
-    setActiveAppointments((prev) => [...prev, { ...patient, status: "Active" }]);
+    // Remove from upcoming appointments
     setUpcomingAppointments((prev) => prev.filter((appt) => appt._id !== patient._id));
-    // Optionally switch to Active tab
-    setActiveTab("active");
+    // Force refresh of active appointments when switching to active tab
+    if (activeTab === "active") {
+      // This will trigger the useEffect in Active component to refresh
+      setActiveAppointments([]);
+    }
   };
 
-  const handleContinueButton = () => {
+  const handleContinueButton = (patient) => {
+    setSelectedPatient(patient);
     setDialogType("active");
     setShowDialog(true);
   };
 
-  const handleViewButton = () => {
+  const handleViewButton = (patient) => {
+    setSelectedPatient(patient);
     setDialogType("completed");
     setShowDialog(true);
   };
@@ -38,6 +44,7 @@ export default function Appointment({ goBack }) {
   const closeDialog = () => {
     setShowDialog(false);
     setDialogType("");
+    setSelectedPatient(null);
   };
 
   return (
@@ -89,7 +96,11 @@ export default function Appointment({ goBack }) {
           />
         )}
         {activeTab === "active" && (
-          <Active appointments={activeAppointments} onContinueButton={handleContinueButton} />
+          <Active 
+            appointments={activeAppointments} 
+            setAppointments={setActiveAppointments}
+            onContinueButton={handleContinueButton} 
+          />
         )}
         {activeTab === "pending" && <Pending onContinueButton={handleContinueButton} />}
         {activeTab === "completed" && <Completed onViewButton={handleViewButton} />}
@@ -98,8 +109,18 @@ export default function Appointment({ goBack }) {
 
       {showDialog && (
         <div className={styles.dialogOverlay}>
-          {dialogType === "active" && <ActiveDialog closeDialog={closeDialog} />}
-          {dialogType === "completed" && <CompletedDialog closeDialog={closeDialog} />}
+          {dialogType === "active" && (
+            <ActiveDialog 
+              closeDialog={closeDialog} 
+              patientData={selectedPatient}
+            />
+          )}
+          {dialogType === "completed" && (
+            <CompletedDialog 
+              closeDialog={closeDialog} 
+              patientData={selectedPatient}
+            />
+          )}
         </div>
       )}
     </div>

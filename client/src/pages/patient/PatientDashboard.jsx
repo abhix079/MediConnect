@@ -49,9 +49,7 @@ export default function PatientDashboard() {
 
       // Update state so the change appears instantly
       setPatients((prev) =>
-        prev.map((p) =>
-          p._id === id ? { ...p, status: "Cancelled" } : p
-        )
+        prev.map((p) => (p._id === id ? { ...p, status: "Cancelled" } : p))
       );
     } catch (err) {
       console.error("Cancel failed:", err);

@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Appointment.module.css";
 import axios from "axios";
 
-export default function Upcoming({ appointments, setAppointments, onActivate }) {
+export default function Upcoming({
+  appointments,
+  setAppointments,
+  onActivate,
+}) {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -23,12 +27,14 @@ export default function Upcoming({ appointments, setAppointments, onActivate }) 
             },
           }
         );
-        
+
         // Filter only upcoming patients
-        const upcomingPatients = res.data.filter(patient => patient.status === "Upcoming");
+        const upcomingPatients = res.data.filter(
+          (patient) => patient.status === "Upcoming"
+        );
         setAppointments(upcomingPatients);
       } catch (err) {
-        console.error("Error fetching appointments:", err); 
+        console.error("Error fetching appointments:", err);
         setAppointments([]);
       }
     };
@@ -42,33 +48,21 @@ export default function Upcoming({ appointments, setAppointments, onActivate }) 
         localStorage.getItem("token") ||
         localStorage.getItem("authToken") ||
         localStorage.getItem("doctorToken");
-
-      if (!token) {
-        alert("Please login again");
-        return;
-      }
-
       const res = await axios.patch(
         `http://localhost:8000/api/patients/${id}/active`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert(res.data.message);
-
-      // Find activated patient
       const activatedPatient = appointments.find((appt) => appt._id === id);
 
-      // Remove from Upcoming list here to avoid double state management in parent
       setAppointments((prev) => prev.filter((appt) => appt._id !== id));
 
-      // Notify parent to add patient to Active list
       if (onActivate && activatedPatient) {
         onActivate(activatedPatient);
       }
     } catch (error) {
       console.error("Failed to update status", error);
-      alert("Failed to update status");
     }
   };
 
@@ -114,6 +108,5 @@ export default function Upcoming({ appointments, setAppointments, onActivate }) 
         </table>
       )}
     </>
-  )}
-
-  
+  );
+}
