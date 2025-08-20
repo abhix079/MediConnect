@@ -19,7 +19,7 @@ export default function ActiveDialog({ closeDialog, patientData }) {
 
       // Call API to update patient status to "Completed"
       const res = await axios.patch(
-        `http://localhost:8000/api/patients/${patientData._id}/complete`,
+        `https://mediconnect-server-tfit.onrender.com/api/patients/${patientData._id}/complete`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
