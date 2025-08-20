@@ -47,7 +47,7 @@ export default function RegisterPatient({ goBack }) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/patients/register",
+        "https://mediconnect-server-tfit.onrender.com/api/patients/register",
         formData
       );
 

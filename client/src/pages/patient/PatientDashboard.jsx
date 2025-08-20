@@ -43,7 +43,7 @@ export default function PatientDashboard() {
   const handleCancel = async (id) => {
     try {
       const resp = await axios.patch(
-        `http://localhost:8000/api/patients/${id}/cancel`
+        `https://mediconnect-server-tfit.onrender.com/api/patients/${id}/cancel`
       );
       console.log(resp.data.message);
 

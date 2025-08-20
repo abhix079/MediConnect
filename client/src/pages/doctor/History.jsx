@@ -32,7 +32,7 @@ export default function History({ goBack }) {
         }
 
         const res = await axios.get(
-          `http://localhost:8000/api/patients/doctor/${doctorId}`,
+          `https://mediconnect-server-tfit.onrender.com/api/patients/doctor/${doctorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
