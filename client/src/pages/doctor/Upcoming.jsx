@@ -20,7 +20,7 @@ export default function Upcoming({
         if (!doctorId) return;
 
         const res = await axios.get(
-          `https://mediconnect-server-tfit.onrender.com/api/patients/doctor/${doctorId}`,
+          `https://mediconnect-02qp.onrender.com/api/patients/doctor/${doctorId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export default function Upcoming({
         localStorage.getItem("authToken") ||
         localStorage.getItem("doctorToken");
       const res = await axios.patch(
-        `https://mediconnect-server-tfit.onrender.com/api/patients/${id}/active`,
+        `https://mediconnect-02qp.onrender.com/api/patients/${id}/active`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

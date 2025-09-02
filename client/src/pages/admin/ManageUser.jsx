@@ -12,7 +12,7 @@ export default function ManageUser({ goBack }) {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("https://mediconnect-server-tfit.onrender.com/api/users/getUsers");
+      const res = await axios.get("https://mediconnect-02qp.onrender.com/api/users/getUsers");
       if (res.status === 200) {
         setUsers(res.data.users);
       }
@@ -24,7 +24,7 @@ export default function ManageUser({ goBack }) {
   const handleDeleteUser = async (userId) => {
     try {
       
-      const res = await axios.delete(`https://mediconnect-server-tfit.onrender.com/api/users/delUser/${userId}`);
+      const res = await axios.delete(`https://mediconnect-02qp.onrender.com/api/users/delUser/${userId}`);
      toast.success("User removed successfully");
      fetchUsers();
     } catch (err) {

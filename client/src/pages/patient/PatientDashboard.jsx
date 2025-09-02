@@ -22,7 +22,7 @@ export default function PatientDashboard() {
     const fetchPatients = async () => {
       try {
         const resp = await axios.get(
-          "https://mediconnect-server-tfit.onrender.com/api/patients/patientDetail",
+          "https://mediconnect-02qp.onrender.com/api/patients/patientDetail",
           {
             params: { mobile },
           }
@@ -43,7 +43,7 @@ export default function PatientDashboard() {
   const handleCancel = async (id) => {
     try {
       const resp = await axios.patch(
-        `https://mediconnect-server-tfit.onrender.com/api/patients/${id}/cancel`
+        `https://mediconnect-02qp.onrender.com/api/patients/${id}/cancel`
       );
       console.log(resp.data.message);
 

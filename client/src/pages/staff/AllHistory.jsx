@@ -8,7 +8,7 @@ export default function History({ goBack }) {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const res = await axios.get("https://mediconnect-server-tfit.onrender.com/api/patients/getAllPatient");
+        const res = await axios.get("https://mediconnect-02qp.onrender.com/api/patients/getAllPatient");
         setAppointments(res.data);
       } catch (err) {
         console.error("Error fetching appointment history:", err);

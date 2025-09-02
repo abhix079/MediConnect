@@ -23,7 +23,7 @@ export default function RegisterPatient({ goBack }) {
     const fetchDoctors = async () => {
       try {
         const res = await axios.get(
-          "https://mediconnect-server-tfit.onrender.com/api/getDoctors"
+          "https://mediconnect-02qp.onrender.com/api/getDoctors"
         );
         setDoctors(res.data);
       } catch (error) {
@@ -47,7 +47,7 @@ export default function RegisterPatient({ goBack }) {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://mediconnect-server-tfit.onrender.com/api/patients/register",
+        "https://mediconnect-02qp.onrender.com/api/patients/register",
         formData
       );
 
