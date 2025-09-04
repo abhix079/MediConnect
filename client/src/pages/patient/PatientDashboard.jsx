@@ -71,7 +71,22 @@ export default function PatientDashboard() {
                     patient.updatedAt || patient.createdAt
                   ).toLocaleDateString()}
                 </p>
-                <p className={styles.status}>{patient.status || "N/A"}</p>
+                <p
+  className={
+    patient.status === "Cancelled"
+      ? styles.cancelledStatus
+      : patient.status === "Completed"
+      ? styles.activeStatus
+      : patient.status === "Pending"
+      ? styles.pendingStatus
+      : patient.status === "Upcoming"
+      ? styles.upcomingStatus
+      : ""
+  }
+>
+  {patient.status || "N/A"}
+</p>
+
               </div>
               <div className={styles.centerDetail}>
                 <p>

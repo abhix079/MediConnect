@@ -36,9 +36,42 @@
   color: rgb(65, 64, 64);
   background-color: rgb(209, 214, 240);
 }
-.status {
-  background-color: #a9f3cd;
-  color: #1b5e20;
+.activeStatus,
+.pendingStatus,
+.cancelledStatus,
+.upcomingStatus,
+.completedStatus {
+  padding: 2px 14px;
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.activeStatus {
+  background-color: #a9f3cd;  
+  color: #1b5e20; 
+}
+
+.pendingStatus {
+  background-color: #fff3cd; 
+  color: #b26a00;           
+}
+
+.cancelledStatus {
+  background-color: #ffd6d6;
+  color: #b71c1c;
+}
+
+.upcomingStatus {
+  background-color: #caebfd;
+  color: #01579b;
+}
+
+.completedStatus {
+  background-color: #e0e0e0;
+  color: #424242;
 }
 
 .buttons {
