@@ -189,6 +189,10 @@ export const completeStatus = async (req, res) => {
   }
 };
 
+
+
+
+
 // Get patients based on doctor
 export const getPatientByDoctor = async (req, res) => {
   try {

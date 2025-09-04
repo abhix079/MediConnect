@@ -29,10 +29,11 @@ router.patch("/:id/active",activeStatus);
 //complete status
 router.patch("/:id/complete", completeStatus);
 
-//get complte status
 
-router.get("/completed",completeStatus);
 
 // ✅ Get patients referred to a specific doctor
 router.get("/doctor/:doctorId", verifyToken, getPatientByDoctor);
+
+
+
 export default router;
