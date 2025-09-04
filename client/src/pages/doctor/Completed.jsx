@@ -3,17 +3,29 @@ import styles from "../../styles/Appointment.module.css";
 import axios from "axios";
 
 export default function Completed({ appointments, setAppointments, onViewButton }) {
-   useEffect(() => {
+
+
+  useEffect(() => {
+ 
+    
     const fetchAppointments = async () => {
       try {
+       
+        
         let token =
           localStorage.getItem("token") ||
           localStorage.getItem("authToken") ||
           localStorage.getItem("doctorToken");
 
+       
+
+      
+
         const payload = JSON.parse(atob(token.split(".")[1]));
         const doctorId = payload.id;
-        if (!doctorId) return;
+       
+        
+    
 
         const res = await axios.get(
           `https://mediconnect-02qp.onrender.com/api/patients/doctor/${doctorId}`,
@@ -24,14 +36,21 @@ export default function Completed({ appointments, setAppointments, onViewButton 
           }
         );
 
-        // Filter only upcoming patients
-        const upcomingPatients = res.data.filter(
+       
+
+        // Filter only completed patients
+        const completedPatients = res.data.filter(
           (patient) => patient.status === "Completed"
         );
-        setAppointments(upcomingPatients);
+
+        
+        setAppointments(completedPatients);
+     
       } catch (err) {
         console.error("Error fetching appointments:", err);
+        
         setAppointments([]);
+       
       }
     };
 
@@ -39,8 +58,10 @@ export default function Completed({ appointments, setAppointments, onViewButton 
   }, [setAppointments]);
 
 
+
   return (
-    <>
+    <div>
+      
       {appointments.length === 0 ? (
         <p className={styles.noPatient}>No completed patients.</p>
       ) : (
@@ -78,6 +99,6 @@ export default function Completed({ appointments, setAppointments, onViewButton 
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 }
