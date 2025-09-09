@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -11,6 +12,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 
 function App() {
+  useEffect(() => {
+    // This is used to Warm up the backend to avoid cold start delays
+    fetch("https://mediconnect-02qp.onrender.com/ping").catch(() => {});
+  }, []);
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -26,7 +32,6 @@ function App() {
           <Route path="/staff-dashboard" element={<StaffDashboard />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
-
         </Routes>
       </BrowserRouter>
     </>
