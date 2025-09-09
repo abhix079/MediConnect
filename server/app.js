@@ -38,6 +38,12 @@ app.get("/", (req, res) => {
 
 });
 
+app.get("/ping",(req,res)=>{
+  res.status(200).json({
+    message:"The server is pinged successfully"
+  })
+})
+
 
 
 //my custom routes

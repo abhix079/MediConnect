@@ -12,11 +12,12 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 
 function App() {
-  useEffect(() => {
-    // This is used to Warm up the backend to avoid cold start delays
-    fetch("https://mediconnect-02qp.onrender.com/ping").catch(() => {});
+useEffect(() => {
+    // Hit backend once when user opens site
+    fetch("https://mediconnect-02qp.onrender.com/ping")
+      .then(() => console.log("Backend warmed up"))
+      .catch(() => {});
   }, []);
-
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
