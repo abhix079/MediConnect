@@ -3,8 +3,9 @@ import AdminNavbar from "../admin/AdminNavbar";
 import styles from "../../styles/AdminDashboard.module.css";
 import AddUser from "./AddUser";
 import ManageUser from "./ManageUser";
+import ChatWidget from "../../components/ChatWidget"; // ⬅️ import
 
-export default function DoctorDashboard() {
+export default function AdminDashboard() {
   const [currentView, setCurrentView] = useState("addUser");
 
   return (
@@ -26,6 +27,9 @@ export default function DoctorDashboard() {
           <ManageUser goBack={() => setCurrentView("addUser")} />
         </div>
       )}
+
+      {/* 🔹 Floating chat */}
+      <ChatWidget role="Admin" name="Admin" />
     </div>
   );
 }
