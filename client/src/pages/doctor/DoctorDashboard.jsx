@@ -29,7 +29,7 @@ export default function DoctorDashboard() {
         </div>
       )}
 
-      {/* 🔹 Floating chat */}
+     
       <ChatWidget role="Doctor" name={name} />
     </div>
   );

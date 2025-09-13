@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle } from "lucide-react";
+import { MdOutlineMessage } from "react-icons/md";
 import socket from "../../socket";
 import styles from "../styles/ChatWidget.module.css";
 
@@ -36,7 +37,7 @@ export default function ChatWidget({ role, name }) {
   return (
     <div>
       <button onClick={() => setOpen(!open)} className={styles.chatFloatBtn}>
-        <MessageCircle size={24} />
+        <MdOutlineMessage size={25} />
       </button>
 
       {open && (
