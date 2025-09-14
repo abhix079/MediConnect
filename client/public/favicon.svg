@@ -1,0 +1,21 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MediConnect Favicon</title>
+  <desc id="desc">Minimal favicon with a pulse line connected to a dot, symbolizing connected healthcare.</desc>
+
+  <defs>
+    <linearGradient id="pulse" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#06d6a0"></stop>
+      <stop offset="1" stop-color="#118ab2"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="512" height="512" rx="120" fill="url(#pulse)"></rect>
+
+  <!-- pulse line -->
+  <path d="M100 280 L180 280 L210 220 L250 340 L300 200 L360 280 L420 280" stroke="#fff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+
+  <!-- connection dot -->
+  <circle cx="100" cy="280" r="28" fill="#fff"></circle>
+</svg>
