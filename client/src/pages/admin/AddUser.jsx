@@ -27,7 +27,7 @@ export default function AddUser() {
       const res = await axios.post("https://mediconnect-02qp.onrender.com/api/users/addUser", formData);
       const { token, userId } = res.data;
 
-      localStorage.setItem("token", token); // ✅ store token
+      localStorage.setItem("token", token); 
       toast.success("User added successfully");
 
       setFormData({
