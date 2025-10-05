@@ -69,7 +69,7 @@ export default function Active({ appointments, setAppointments, onContinueButton
                 <td>
                   <button 
                     className={styles.actionBtn} 
-                    onClick={() => handleContinueClick(appt)}
+                    onClick={() => handleContinueClick(appt)}//isse continue wala actionperform krenge
                   >
                     Continue
                   </button>
