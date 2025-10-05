@@ -2,8 +2,10 @@ import styles from "../styles/Dialog.module.css";
 import { FaUser } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function ActiveDialog({ closeDialog, patientData }) {
+  const navigate = useNavigate(); 
 
   const handleCompleteCheckup = async () => {
     try {
@@ -17,8 +19,7 @@ export default function ActiveDialog({ closeDialog, patientData }) {
         return;
       }
 
-      // Call API to update patient status to "Completed"
-      const res = await axios.patch(
+      await axios.patch(
         `https://mediconnect-02qp.onrender.com/api/patients/${patientData._id}/complete`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
@@ -26,9 +27,9 @@ export default function ActiveDialog({ closeDialog, patientData }) {
 
       toast.success("Checkup Completed Successfully!");
       closeDialog();
-      // Add a small delay before reload to show the toast
+
       setTimeout(() => {
-        window.location.reload();
+        navigate("/doctor-dashboard");
       }, 1000);
     } catch (error) {
       console.error("Failed to complete checkup:", error);
@@ -36,7 +37,6 @@ export default function ActiveDialog({ closeDialog, patientData }) {
     }
   };
 
-  // If no patient data is provided, show default or loading state
   if (!patientData) {
     return (
       <div className={styles.dialogBox}>
@@ -93,11 +93,13 @@ export default function ActiveDialog({ closeDialog, patientData }) {
               <FaUser size={60} />
             </div>
           </div>
+
           <p className={styles.dialogHeadings}>Medical Details</p>
           <div className={styles.medicalDetail}>
             <p>
-              <strong>Referred By : </strong> 
-              Dr. {patientData.referredBy?.firstName} {patientData.referredBy?.lastName}
+              <strong>Referred By : </strong>
+              Dr. {patientData.referredBy?.firstName}{" "}
+              {patientData.referredBy?.lastName}
             </p>
             <p>
               <strong>Symptom / Reason : </strong> {patientData.reason}
@@ -108,8 +110,9 @@ export default function ActiveDialog({ closeDialog, patientData }) {
               </p>
             )}
           </div>
-          <button 
-            className={styles.completeButton} 
+
+          <button
+            className={styles.completeButton}
             onClick={handleCompleteCheckup}
           >
             Complete Checkup
